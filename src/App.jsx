@@ -1,17 +1,20 @@
-import Header from "./assets/components/Header";
-import Form from "./assets/components/Form";
-import ListPatients from "./assets/components/ListPatients";
+import Header from "./components/Header";
+import Form from "./components/Form";
+import ListPatients from "./components/ListPatients";
 
 function App() {
  
  
   return (
   
-      <>
+      <div className="container mx-auto mt-20">
       <Header/>
+      <div className="mt-12 flex">
       <Form/>
       <ListPatients/>
-      </>
+
+      </div>
+      </div>
     
 
   )
