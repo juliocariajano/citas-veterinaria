@@ -1,8 +1,22 @@
+import {useEffect, useState} from 'react';
+
+
 const Form =()=>{
+const [name, setName] = useState("")
+const [owner, setOwner] = useState("")
+const [email, setEmail]=useState("")
+const [date, setDate]=useState("")
+const [symptoms, setSymptoms]=useState("")
 
 
+
+
+const handleSubmit =(e)=>{
+    e.preventDefault();
+    console.log("enviando....",name,owner,email, date, symptoms)
+}
     return(
-        <div className="md:w-1/2 lg:w-2/5" >
+        <div className="md:w-1/2 lg:w-2/5 mx-5" >
 
         <h2 className="font-black text-3xl text-center">
             Seguimiento pacientes
@@ -14,7 +28,10 @@ const Form =()=>{
                 Administralos
             </span>
         </p>
-        <form className="bg-white shadow-sm rounded-lg py-10 px-5">
+        <form
+        
+        onSubmit={handleSubmit}
+        className="bg-white shadow-sm rounded-lg py-10 px-5">
             <div className="mb-5">
                 <label htmlFor="mascota" className="block text-gray-700 uppercase font-bold">Nombre de Mascota</label>
                 <input
@@ -22,6 +39,8 @@ const Form =()=>{
                 type="text"
                 placeholder="Nombre de Mascota"
                 className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+                value={name}
+                onChange={(e)=>setName(e.target.value)}
 />
 </div>
         
@@ -33,6 +52,8 @@ const Form =()=>{
                 type="text"
                 placeholder="Nombre de Propietario"
                 className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+                value={owner}
+                onChange={(e)=>setOwner(e.target.value)}
 />
             </div>
 
@@ -45,6 +66,8 @@ const Form =()=>{
                 type="email"
                 placeholder="Correo Electronico Propietario"
                 className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+                value={email}
+                onChange={(e)=>setEmail(e.target.value)}
 />
             </div>
 
@@ -55,6 +78,8 @@ const Form =()=>{
                 id="alta"
                 type="date"
                 className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+                value={date}
+                onChange={(e)=>setDate(e.target.value)}
 />
             </div>
 
@@ -67,6 +92,8 @@ const Form =()=>{
                 type="date"
                 className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
                 placeholder="Describe los sintomas"
+                value={symptoms}
+                onChange={(e)=>setSymptoms(e.target.value)}
 />
             </div>
 
