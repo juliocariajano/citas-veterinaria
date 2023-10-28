@@ -1,6 +1,6 @@
 import Patient from "./Patient"
 
-const ListPatients =({pacientes})=>{
+const ListPatients =({pacientes,setPaciente, deletedPatient})=>{
 
 
     return(
@@ -36,6 +36,8 @@ const ListPatients =({pacientes})=>{
 <Patient
 key={paciente.id}
 paciente={paciente}
+setPaciente={setPaciente}
+deletedPatient={deletedPatient}
 />
 ))}
       

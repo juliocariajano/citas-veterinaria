@@ -1,6 +1,8 @@
+/* eslint-disable react/prop-types */
 
 
-const Patient = ({paciente}) => {
+const Patient = ({paciente,setPaciente,deletedPatient}) => {
+
   return (
         <div className="mx-5 my-10 bg-white shadow-md px-5 py-10 rounded-xl">
             <p className="font-bold mb-3 text-gray-700 uppercase"> Nombre: {""}
@@ -36,6 +38,7 @@ const Patient = ({paciente}) => {
             <button
             type="button" 
             className="py-2 px-10 bg-indigo-600 hover:bg-indigo-800 text-white font-bold uppercase rounded-md"
+            onClick={() => setPaciente(paciente)}
             >
                 Editar
             </button>
@@ -43,6 +46,7 @@ const Patient = ({paciente}) => {
             <button
             type="button" 
             className="py-2 px-10 bg-red-500 hover:bg-red-800 text-white font-bold uppercase rounded-md"
+            onClick={() => deletedPatient(paciente.id)}
             >
                 Eliminar
             </button>

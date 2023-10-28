@@ -1,12 +1,12 @@
+/* eslint-disable react/prop-types */
 import {useEffect, useState} from 'react';
 import Error from './Error';
 
 
 const Form =(props)=>{
 
-    const {pacientes,setPacientes} = props;
+    const {pacientes,setPacientes, paciente, setPaciente, deletedPatient} = props;
 
-console.log(pacientes,"soy formularoppppppppppp")
 const [name, setName] = useState("")
 const [owner, setOwner] = useState("")
 const [email, setEmail]=useState("")
@@ -14,6 +14,18 @@ const [date, setDate]=useState("")
 const [symptoms, setSymptoms]=useState("")
 
 const [error, setError] = useState(false)
+
+useEffect(() => {
+  if (Object.keys(paciente).length > 0){
+    setName(paciente.name)
+    setOwner(paciente.owner)
+    setEmail(paciente.email)
+    setDate(paciente.date)
+    setSymptoms(paciente.symptoms)
+  }
+
+}, [paciente])
+
 
 const generarId=()=>{
     const random = Math.random().toString(36).substring(2)
@@ -37,9 +49,18 @@ const handleSubmit =(e)=>{
             email,
             date,
             symptoms,
-            id:generarId()
         }
-        setPacientes([...pacientes, objPaciente])
+
+        if(paciente.id){
+            objPaciente.id=paciente.id
+
+            const pacienteActualizado = pacientes.map(pacienteState => pacienteState.id=== paciente.id ? objPaciente : pacienteState)
+            setPacientes(pacienteActualizado)
+            setPaciente({})
+        }else{
+            objPaciente.id=generarId()
+            setPacientes([...pacientes, objPaciente])
+        }
         setName("")
         setOwner("")
         setEmail("")
@@ -140,7 +161,7 @@ const handleSubmit =(e)=>{
             
             type="submit"
             className="bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:bg-indigo-800 cursor-pointer transition-opacity:2"
-            value="Agregar Paciente mb-10"
+            value={paciente.id? "Editar Paciente" : "Agregar Paciente"}
 
           />
 
