@@ -1,20 +1,55 @@
 import {useEffect, useState} from 'react';
+import Error from './Error';
 
 
-const Form =()=>{
+const Form =(props)=>{
+
+    const {pacientes,setPacientes} = props;
+
+console.log(pacientes,"soy formularoppppppppppp")
 const [name, setName] = useState("")
 const [owner, setOwner] = useState("")
 const [email, setEmail]=useState("")
 const [date, setDate]=useState("")
 const [symptoms, setSymptoms]=useState("")
 
+const [error, setError] = useState(false)
 
+const generarId=()=>{
+    const random = Math.random().toString(36).substring(2)
+    const fecha = Date.now().toString(36)
+    return random + fecha 
+}
 
 
 const handleSubmit =(e)=>{
     e.preventDefault();
-    console.log("enviando....",name,owner,email, date, symptoms)
+
+    if([name, owner, email, date, symptoms].includes("")){
+        setError(true)
+        return;
+    }
+
+        setError(false);
+        const objPaciente={
+            name,
+            owner,
+            email,
+            date,
+            symptoms,
+            id:generarId()
+        }
+        setPacientes([...pacientes, objPaciente])
+        setName("")
+        setOwner("")
+        setEmail("")
+        setEmail("")
+        setSymptoms("")
+    
+
 }
+    
+
     return(
         <div className="md:w-1/2 lg:w-2/5 mx-5" >
 
@@ -28,10 +63,14 @@ const handleSubmit =(e)=>{
                 Administralos
             </span>
         </p>
+
         <form
-        
         onSubmit={handleSubmit}
-        className="bg-white shadow-sm rounded-lg py-10 px-5">
+        className="bg-white shadow-sm rounded-lg py-10 px-5"
+        >
+            {error && (<Error
+            mensaje="Todos los campos son obligatorios"
+            /> ) }
             <div className="mb-5">
                 <label htmlFor="mascota" className="block text-gray-700 uppercase font-bold">Nombre de Mascota</label>
                 <input
